@@ -1,0 +1,68 @@
+.restaurant-card {
+    display: flex;
+    justify-content: center;
+    border-style: solid;
+    border-color: black;
+    background-color: white;
+}
+
+.restaurant-img{
+    height: 250px;
+    width: 200px;
+}
+
+.restaurant-details{
+    height: 250px;
+    padding: 0px 8px 8px 8px;
+}
+
+.restaurant-image{
+    padding: 16px 8px 16px 8px;
+}
+
+.mobile-booking-link{
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .restaurant-img{
+        height: 300px;
+        width: 175px;
+        padding: 0px 8px 4px 0px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .restaurant-card{
+        flex-direction: column;
+    }
+
+    .mobile-booking-link{
+        visibility: visible;
+    }
+
+    .desktop-booking-link{
+        display: none;
+    }
+
+    .restaurant-img{
+        height: 300px;
+        width: 250px;
+        padding: 0px 8px 4px 0px;
+    }
+    
+    .restaurant-details{
+        width: 300px;
+        height: 250px;
+        font-size: 28px;
+    }
+
+    .restaurant-details > p{
+        margin: 12px auto;
+    }
+
+    .restaurant-card{
+        height: 675px;
+    }
+}
+

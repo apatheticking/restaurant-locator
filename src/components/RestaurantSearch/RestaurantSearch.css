@@ -1,0 +1,21 @@
+.restaurant-search-container {
+    height: 50vh;
+    width: 100%;
+    background-color: #8B0000;
+    color: white;
+}
+
+.restaurant-search-container > h2 {
+    font-size: 36px;
+}
+
+.submit-button {
+    height: 28px;
+    margin-left: 28px;
+}
+
+@media only screen and (max-width: 600px) {
+    .restaurant-search-container > h2 {
+        font-size: 20px;
+    }
+}
