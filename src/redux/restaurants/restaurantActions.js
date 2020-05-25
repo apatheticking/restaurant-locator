@@ -39,7 +39,7 @@ export const fetchRestaurants = ( city, page, searchBy, searchValue ) => {
 
     return (dispatch) => {
         dispatch(fetchRestaurantRequest())
-        axios.get(`http://opentable.herokuapp.com/api/restaurants?city=${cityParam}${pageParam}${searchByParam}`)
+        axios.get(`https://opentable.herokuapp.com/api/restaurants?city=${cityParam}${pageParam}${searchByParam}`)
             .then( response => {
                 dispatch(fetchRestaurantsSuccess(response.data))
             })
