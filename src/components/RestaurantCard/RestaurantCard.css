@@ -52,7 +52,7 @@
     }
     
     .restaurant-details{
-        width: 300px;
+        width: 250px;
         height: 250px;
         font-size: 28px;
     }
@@ -62,7 +62,8 @@
     }
 
     .restaurant-card{
-        height: 675px;
+        height: 750px;
+        width: 280px;
     }
 }
 

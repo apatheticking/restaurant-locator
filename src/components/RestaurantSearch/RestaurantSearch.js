@@ -8,8 +8,9 @@ export default function RestaurantSearch({handleSumbit, cityRef}) {
             <Header />
             <h2>Let's us help find something near you!</h2>
             <form onSubmit={handleSumbit}>
-                <input className={'text-input'} type='text' ref={cityRef}/>
-                <input className={'submit-button'} type="submit" value="Search" />
+                <label htmlFor={'city-search'}>City Search</label>
+                <input id={'city-search'} className={'text-input'} type='text' ref={cityRef}/>
+                <input id={'city-search-submit-button'} className={'submit-button'} type="submit" value="Search" />
             </form>
         </div>
     )

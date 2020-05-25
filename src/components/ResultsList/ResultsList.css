@@ -5,6 +5,7 @@
     grid-row-gap: 16px;
     align-items: center;
     width: 90vw;
+    margin-bottom: 100px;
 }
 
 .total-results {

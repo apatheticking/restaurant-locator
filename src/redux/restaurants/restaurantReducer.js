@@ -3,7 +3,7 @@ import {
     FETCH_RESTAURANTS_REQUEST_FINISHED,
     FETCH_RESTAURANTS_SUCCESS,
     FETCH_RESTAURANTS_FAILURE
-} from './restaurantsTypes'
+} from './restaurantTypes'
 
 const initialState = {
     loading: false,

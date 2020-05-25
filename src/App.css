@@ -32,6 +32,10 @@
   margin-right: 28px;
 }
 
+.no-results {
+  font-size: 48px;
+}
+
 @media only screen and (max-width: 768px) {
   .text-input {
     height: 36px;
@@ -43,6 +47,11 @@
   
   .drop-down-menu {
     height: 36px;
+  }
+
+  .no-results {
+    padding-top: 28px;
+    font-size: 48px;
   }
 }
 
@@ -60,6 +69,10 @@
   
   .drop-down-menu {
     height: 48px;
+  }
+
+  .no-results {
+    font-size: 36px;
   }
 }
 

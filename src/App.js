@@ -1,33 +1,48 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import { fetchRestaurants } from 'redux/restaurants/restaurantActions'
-import List from 'components/List/List'
+import ResultsList from 'components/ResultsList/ResultsList'
 import RestaurantSearch from 'components/RestaurantSearch/RestaurantSearch'
 import RefineSearch from 'components/RefineSearch/RefineSearch'
 import './App.css';
 
-function App({restaurantData, loading, fetchRestaurants, error}) {
-  // const [ city, setCity ] = useState()
-  // const [ searchBy, setSearchBy] = useState('name')
-  // const [ searchValue, setSearchValue ] = useState()
+function App({restaurantData, loading, fetchRestaurants, errorMsg}) {
+  const [ isRefinedSearch, setIsRefinedSearch ] = useState(false)
+  const [ newSearch, setNewSearch ] = useState(false)
   const cityRef = useRef()
-  const searchByRef = useRef(null)
-  const searchValueRef = useRef(null)
+  const searchByRef = useRef()
+  const searchValueRef = useRef()
   
   const handleSumbit = (e) => {
     e.preventDefault()
+    setNewSearch(true)
+    setIsRefinedSearch(false)
     fetchRestaurants(cityRef.current.value)
   }
 
-  const loadMore = (page) => {
-    fetchRestaurants(cityRef.current.value, page)
+  const loadMore = (page, isRefinedSearch) => {
+      if(isRefinedSearch) {
+        fetchRestaurants(
+          cityRef.current.value, 
+          page, 
+          searchByRef.current.value, 
+          searchValueRef.current.value
+        )
+      } else {
+        fetchRestaurants(cityRef.current.value, page)
+      }
   }
 
-  const handleRefineSearchSubmit = (e, searchBy, searchValue) => {
+  const handleRefineSearchSubmit = (e) => {
     e.preventDefault()
-    console.log({searchBy, searchValue})
-    // fetchRestaurants(cityRef.current.value, null, searchByRef.current.value, searchValueRef.current.value)
-    fetchRestaurants(cityRef.current.value, null, searchBy.current.value, searchValue.current.value)    
+    setIsRefinedSearch(true)
+    setNewSearch(true)
+    fetchRestaurants(
+      cityRef.current.value, 
+      null, 
+      searchByRef.current.value, 
+      searchValueRef.current.value
+    )
   }
 
   return (
@@ -36,24 +51,27 @@ function App({restaurantData, loading, fetchRestaurants, error}) {
           handleSumbit={handleSumbit}
           cityRef={cityRef}
       />
-
+      { errorMsg ? <span>{errorMsg}</span> : null }
       { 
         restaurantData && restaurantData.restaurants.length !== 0 ? 
           <div>
-            <RefineSearch 
-              handleRefineSearchSubmit={handleRefineSearchSubmit}
-              // searchByRef={searchByRef}
-              // searchValueRef={searchValueRef}
-            />
-            <List 
-              loading={loading}
-              restaurantData={restaurantData}
-              error={error}
-              loadMore={loadMore}
-            />
+              <RefineSearch 
+                handleRefineSearchSubmit={handleRefineSearchSubmit}
+                searchByRef={searchByRef}
+                searchValueRef={searchValueRef}
+              />
+              <ResultsList 
+                loading={loading}
+                restaurantData={restaurantData}
+                loadMore={loadMore}
+                isRefinedSearch={isRefinedSearch}
+                newSearch={newSearch}
+                setNewSearch={setNewSearch}
+              />
           </div>
           :
-          null
+          restaurantData && newSearch ?
+            <h2 className={'no-results'}>no results</h2> : null
       }
     </div>
   );
@@ -69,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRestaurants: (city, page) => dispatch(fetchRestaurants(city, page)),
+    fetchRestaurants: (city, page, searchBy, searchValue) => dispatch(fetchRestaurants(city, page, searchBy, searchValue)),
   }
 }
 
